@@ -8,6 +8,29 @@
   <div class="p-3 mb-2 bg-info text-white text-left">
     <h5 class="card-title"><strong>Description: </strong><%= @project.description %></h5>
   </div>
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <% if current_user.manager? %>
+        <td>
+          <%=link_to "Edit Project", edit_project_path(@project), class: "btn btn-info" %>   
+        </td>
+      <%end %>  
+    </div>
+    <div class="col-sm">
+      <% if current_user.manager?%>
+        <td>
+          <%=link_to "Delete Project", project_path(@project), method: :delete, class: " btn btn-info" %>
+        </td>
+      <%end %> 
+    </div>
+    <div class="col-sm">
+      <% if current_user.manager? %>
+        <%=link_to "Create Project", new_project_path, :class => 'btn btn-info' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
   <% if @project.users.present?%>
     <h3 class="text-info">Developers Assigned</h3>

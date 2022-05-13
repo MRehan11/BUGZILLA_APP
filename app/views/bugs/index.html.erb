@@ -1,7 +1,7 @@
 
 
   <div class="container text-center">
-    <h1>Bugs Listing Page</h1>
+    <h3 class="text-info">Bugs Listing Page</h3>
 
     <table class="table">
       <thead class="thead-dark">
@@ -36,15 +36,15 @@
       </tbody>
     </table>
 
-    <h3>Associated Project Details</h3>
-    <nav class="navbar navbar-light bg-light">
+    <h3 class="text-info">Associated Project Details</h3>
+    <div class="p-3 mb-2 bg-info text-white text-left">
       <h6 class="card-title"><strong>Title: </strong><%= @project.title %></h6>
-    </nav>
-    <nav class="navbar navbar-light bg-light">
+    </div>
+    <div class="p-3 mb-2 bg-info text-white text-left">
       <h6 class="card-title"><strong>Owner: </strong><%= @project.creator.name %></h6>
-    </nav>
+    </div>
     <p>
-    <h4>Assignees</h4>
+    <h3 class="text-info">Assignees</h3>
     <table class="table">
       <thead class="thead-dark">
         <tr>
