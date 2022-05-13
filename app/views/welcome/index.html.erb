@@ -1,0 +1,10 @@
+
+<h1 class="text-success">Hello, Rails!</h1>
+<% if user_signed_in? %>
+  <i class="text-danger">Logged in as</i> <strong class="text-info"><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "View Projects", projects_path, :class => 'navbar-link'  %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>

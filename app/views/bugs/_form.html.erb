@@ -1,0 +1,10 @@
+
+<%= bootstrap_form_with(model: @bug, url: [@project, @bug], local: true) do |f| %>
+  <%= f.text_field :title, required: true %>
+  <%= f.text_area :description, required: true %>
+  <%= f.file_field :screenshot %>
+  <%= f.date_field :start_date, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD",}}, required: true %>
+  <%= f.collection_select(:user_id, User.developer, :id, :name) %>
+  <%= f.select(:status, Bug.statuses.keys, required: true) %>
+  <%= f.submit %>
+<% end %>

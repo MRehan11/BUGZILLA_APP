@@ -1,0 +1,7 @@
+
+  <%= bootstrap_form_with(model: @project,  local: true, label_errors: true, inline_errors: true) do |f| %>
+    <%= f.text_field :title, required: true %>
+    <%= f.text_field :description, required: true %>
+    <%= f.collection_select :user_ids, User.developer, :id, :name, {prompt: "Select Developers" }, {:multiple => true} %>
+    <%= f.submit %>
+  <% end %>

@@ -1,0 +1,43 @@
+
+
+<div class="container text-center"> 
+  <h3 class="text-info">Project Details</h3>
+  <div class="p-3 mb-2 bg-info text-white text-left">
+    <h5 class="card-title"><strong>Project Title: </strong><%= @project.title %></h5>
+  </div>
+  <div class="p-3 mb-2 bg-info text-white text-left">
+    <h5 class="card-title"><strong>Description: </strong><%= @project.description %></h5>
+  </div>
+
+  <% if @project.users.present?%>
+    <h3 class="text-info">Developers Assigned</h3>
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.users.each do |user| %>
+          <tr>
+            <td><%= user.name.capitalize %></td>
+            <td><%= user.email %></td>
+          </tr>
+        <%end %>
+      </tbody>
+    </table>
+  <%end %>  
+
+  <% if @project.bugs.present? %>
+    <h3 class="text-info">Project Bugs</h3>
+    <% @project.bugs.each do |bug| %>
+      <p><strong>Ttile:</strong> <%= bug.title.capitalize %></p>
+      <p><strong>Description:</strong> <%= bug.description %></p>
+      <%=link_to "View", project_bug_path(@project, bug) %> |
+      <% if current_user.qa? %>
+        <%=link_to "Edit", edit_project_bug_path(@project, bug)  %> |
+        <%=link_to "Delete", project_bug_path(@project, bug), method: :delete  %>
+        <% end %>
+    <%end %>
+  <%end %>

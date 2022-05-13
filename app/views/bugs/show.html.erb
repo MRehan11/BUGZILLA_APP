@@ -1,0 +1,56 @@
+
+
+<div class="container text-center">
+    <h1 class="text-info">Bug Details</h1>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Owner</th>
+          <th>Assignee</th>
+          <th>Start Date</th>
+          <% if current_user.qa?%>
+            <th>Update</th>
+          <%end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @bug.title %></td>
+          <td><%= @bug.description %></td>
+          <td><%= @bug.creator.name %></td>
+          <td><%= @bug.user.try(:name) %></td>
+          <td><%= @bug.start_date %></td>
+          <td>
+            <% if current_user.qa? %>
+              <%=link_to "Update", edit_project_bug_path(@project, @bug)  %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <% if current_user.qa?%>
+      <h3 class="text-info">Available Users</h3>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Assign to Bug</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% User.where(role: 0).where.not(id: @bug.id).each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.role %></td>
+              <td><%=link_to "Assign Bug", project_bug_assign_user_path(@project, @bug, user) %></td>
+            </tr>
+          <%end %>  
+        </tbody>
+      </table>
+    <%end %>  
+  </div>
