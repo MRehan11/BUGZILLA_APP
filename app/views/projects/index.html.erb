@@ -1,7 +1,7 @@
   <div class="container text-center">
     <div class="row">
       <h1 class="col-9 text-info" style="padding-left: 6em">All Projects</h1>
-      <% if current_user.manager? %>
+      <% if can? :create, @project %>
         <%=link_to "Create Project", new_project_path, :class => 'btn btn-light col-2' %>
       <% end %>
     </div>
@@ -11,7 +11,7 @@
           <th scope="col">Project Name</th>
           <th scope="col">Manager</th>
           <th scope="col">View</th>
-          <% if current_user.manager? %>
+          <% if can? :manage, Project %>
             <th scope="col">Update</th>
             <th scope="col">Delete</th>
           <%end %>  
@@ -25,7 +25,7 @@
             <td>
               <%=link_to "show", project_path(project)  %>
             </td>
-            <% if current_user.manager? %>
+            <% if can? :manage, project %>
               <td>
                 <%=link_to "edit", edit_project_path(project)  %>  
               </td>

@@ -23,7 +23,7 @@
           <td><%= @bug.user.try(:name) %></td>
           <td><%= @bug.start_date %></td>
           <td>
-            <% if current_user.qa? %>
+            <% if can? :update, @bug %>
               <%=link_to "Update", edit_project_bug_path(@project, @bug)  %>
             <% end %>
           </td>

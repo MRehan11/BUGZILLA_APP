@@ -11,7 +11,7 @@
           <th>Owner</th>
           <th>Assignee</th>
           <th>View</th>
-          <% if current_user.qa? %>
+          <% if can? :manage, Bug %>
             <th>Update</th>
           <%end %>  
         </tr>
@@ -27,7 +27,7 @@
               <%=link_to "View", project_bug_path(@project, bug)  %>
             </td>
             <td>
-              <% if current_user.qa? %>
+              <% if can? :manage, Bug %>
                 <%=link_to "Edit", edit_project_bug_path(@project,bug)  %>
               <% end %>
             </td>
@@ -63,5 +63,7 @@
         <%end %>  
       </tbody>
     </table>
-    <%=link_to "Create Bug", projects_path, :class => 'btn btn-light' %>
+    <% if can? :manage, Bug%>
+      <%=link_to "Create Bug", projects_path, :class => 'btn btn-light' %>
+    <%end %>  
   </div>

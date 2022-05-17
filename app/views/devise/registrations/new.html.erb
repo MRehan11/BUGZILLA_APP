@@ -1,4 +1,24 @@
   
+ <script type="text/javascript">
+
+  $('#pwd, #cfrm_pwd').on('keyup', function () {
+  if ($('#pwd').val() == $('#cfrm_pwd').val()) {
+    $('#message').html('Matching').css('color', 'green');
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
+  });
+
+  //  var check = function() {
+  //   if (document.getElementById('pwd').value == document.getElementById('cfrm_pwd').value) {
+  //       document.getElementById('message').style.color = 'green';
+  //       document.getElementById('message').innerHTML = 'matching';
+  //   } else {
+  //       document.getElementById('message').style.color = 'red';
+  //       document.getElementById('message').innerHTML = 'not matching';
+  //   }
+  // }
+  </script>
+ 
   <div class="container text-center">
     <h2>Sign up</h2>
   </div>
@@ -17,11 +37,12 @@
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password", required: true %>
+          <%= f.password_field :password, autocomplete: "new-password", required: true, id: :pwd %>
         </div>
 
         <div class="field">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, id: :cfrm_pwd %>
+          <span id="message"></span>
         </div>
 
         <div class="field">

@@ -60,7 +60,8 @@
       <%=link_to "View", project_bug_path(@project, bug) %> |
       <% if current_user.qa? %>
         <%=link_to "Edit", edit_project_bug_path(@project, bug)  %> |
-        <%=link_to "Delete", project_bug_path(@project, bug), method: :delete  %>
+        <%=link_to "Delete", project_bug_path(@project, bug), method: :delete  %> |
+        <%=link_to "Add New Bug", new_project_bug_path(@project) %>
         <% end %>
     <%end %>
   <%end %>

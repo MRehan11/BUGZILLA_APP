@@ -28,6 +28,7 @@ gem 'devise'
 gem 'carrierwave', '~> 2.0'
 gem 'rmagick'
 gem 'mailcatcher'
+gem "cancan"
 # Also add either `oj` or `yajl-ruby` as the JSON parser
 gem 'oj'
 # Use Redis adapter to run Action Cable in production
