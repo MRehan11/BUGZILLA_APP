@@ -1,5 +1,6 @@
 class BugsController < ApplicationController
-  before_action :set_project, only: [:new, :create,:show,:index, :edit, :update]
+  before_action :authenticate_user!
+  before_action :set_project, only: [:new, :create, :show, :index, :edit, :update]
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -13,7 +14,7 @@ class BugsController < ApplicationController
     @bug = @project.bugs.new(bug_params)
     @bug.qa_id = current_user.id
     if @bug.save
-      flash[:notice] = "Bug Created"
+      flash[:success] = "Bug Created"
       redirect_to project_bug_path(@project, @bug)
     else
       redirect_to project_bugs_path
@@ -34,6 +35,7 @@ class BugsController < ApplicationController
   end
 
   def index
+    @bugs = @project.bugs
   end
 
   def edit
@@ -41,7 +43,7 @@ class BugsController < ApplicationController
 
   def update
     if @bug.update(bug_params)
-      flash[:notice] = "Bug was updated successfully."
+      flash[:success] = "Bug was updated successfully."
       redirect_to project_bug_path(@project, @bug)
     else
       render "edit"

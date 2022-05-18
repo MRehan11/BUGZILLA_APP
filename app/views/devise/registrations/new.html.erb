@@ -19,7 +19,7 @@
   // }
   </script>
  
-  <div class="container text-center">
+  <div class="container">
     <h2>Sign up</h2>
   </div>
   <div class="container">
@@ -27,21 +27,21 @@
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
-          <%= f.text_field :name, autofocus: true, autocomplete: "Name", required: true %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "Name", required: true, style: 'width:50%;' %>
         </div>
         <div class="field">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, style: 'width:50%;' %>
         </div>
 
         <div class="field">
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password", required: true, id: :pwd %>
+          <%= f.password_field :password, autocomplete: "new-password", required: true, id: :pwd, style: 'width:50%;' %>
         </div>
 
         <div class="field">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, id: :cfrm_pwd %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, id: :cfrm_pwd, style: 'width:50%;' %>
           <span id="message"></span>
         </div>
 

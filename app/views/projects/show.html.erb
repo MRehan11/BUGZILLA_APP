@@ -1,67 +1,93 @@
 
-
-<div class="container text-center"> 
-  <h3 class="text-info">Project Details</h3>
-  <div class="p-3 mb-2 bg-info text-white text-left">
-    <h5 class="card-title"><strong>Project Title: </strong><%= @project.title %></h5>
-  </div>
-  <div class="p-3 mb-2 bg-info text-white text-left">
-    <h5 class="card-title"><strong>Description: </strong><%= @project.description %></h5>
-  </div>
-  <div class="container">
   <div class="row">
     <div class="col-sm">
-      <% if current_user.manager? %>
-        <td>
-          <%=link_to "Edit Project", edit_project_path(@project), class: "btn btn-info" %>   
-        </td>
-      <%end %>  
     </div>
     <div class="col-sm">
-      <% if current_user.manager?%>
-        <td>
-          <%=link_to "Delete Project", project_path(@project), method: :delete, class: " btn btn-info" %>
-        </td>
+    </div>
+    <div class="col-sm">
+      <% if can? :manage, Bug%>
+        <%=link_to "Add New Bug To Project", new_project_bug_path(@project) %>
       <%end %> 
     </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
     <div class="col-sm">
       <% if current_user.manager? %>
-        <%=link_to "Create Project", new_project_path, :class => 'btn btn-info' %>
+        <%=link_to "Create New Project", new_project_path %>
       <% end %>
     </div>
-  </div>
-</div>
-
-  <% if @project.users.present?%>
-    <h3 class="text-info" style=" margin-top:30px;">Developers Assigned</h3>
-    <table class="table table-sm">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @project.users.each do |user| %>
-          <tr>
-            <td><%= user.name.capitalize %></td>
-            <td><%= user.email %></td>
-          </tr>
+    <div class="row">
+      <div class="col-sm">
+        <% if current_user.manager? %>
+          <%=link_to "Edit Project", edit_project_path(@project) %> |
+          <%=link_to "Delete Project", project_path(@project), method: :delete %>
         <%end %>
-      </tbody>
-    </table>
-  <%end %>  
+    </div>
+  </div>
+  </div>
 
-  <% if @project.bugs.present? %>
-    <h3 class="text-info">Project Bugs</h3>
-    <% @project.bugs.each do |bug| %>
-      <p><strong>Ttile:</strong> <%= bug.title.capitalize %></p>
-      <p><strong>Description:</strong> <%= bug.description %></p>
-      <%=link_to "View", project_bug_path(@project, bug) %> |
-      <% if current_user.qa? %>
-        <%=link_to "Edit", edit_project_bug_path(@project, bug)  %> |
-        <%=link_to "Delete", project_bug_path(@project, bug), method: :delete  %> |
-        <%=link_to "Add New Bug", new_project_bug_path(@project) %>
-        <% end %>
-    <%end %>
-  <%end %>
+  <div class="container text-center"> 
+    <h3 class="text-info">Project Details</h3>
+    <div class="p-3 mb-2 bg-info text-white text-left">
+      <h5 class="card-title"><strong>Project Title: </strong><%= @project.title %></h5>
+    </div>
+    <div class="p-3 mb-2 bg-info text-white text-left">
+      <h5 class="card-title"><strong>Description: </strong><%= @project.description %></h5>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <% if @project.users.present?%>
+      <h3 class="text-info" style=" margin-top:30px;">Developers Assigned</h3>
+      <table class="table table-sm table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project.users.each do |user| %>
+            <tr>
+              <td><%= user.name.capitalize %></td>
+              <td><%= user.email %></td>
+            </tr>
+          <%end %>
+        </tbody>
+      </table>
+    <%end %>  
+  </div>
+
+  <div class="container">
+    <% if @project.bugs.present?%>
+      <h3 class="text-info text-center">Project Bugs</h3>
+      <table class="table table-striped table-dark table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">View</th>
+            <% if current_user.qa?%>
+              <th scope="col">Update</th>
+              <th scope="col">Delete</th>
+            <%end %>  
+          </tr>
+        </thead>
+        <tbody>
+        <% @project.bugs.each do |bug| %>
+          <tr>
+            <td><%= bug.title %></td>
+            <td><%= bug.description%></td>
+            <td><%=link_to "View", project_bug_path(@project, bug) %></td>
+            <% if current_user.qa?%>
+              <td><%=link_to "Edit", edit_project_bug_path(@project, bug)  %></td>
+              <td><%=link_to "Delete", project_bug_path(@project, bug), method: :delete  %></td>
+            <%end %>  
+          </tr>
+        <%end %>  
+        </tbody>
+      </table>
+    <%end %>  
+  </div>  

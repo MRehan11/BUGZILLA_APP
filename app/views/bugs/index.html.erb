@@ -3,7 +3,7 @@
   <div class="container text-center">
     <h3 class="text-info">Bugs Listing Page</h3>
 
-    <table class="table">
+    <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
           <th>Title</th>
@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @project.bugs.each do |bug| %>
+        <% @bugs.each do |bug| %>
           <tr>
             <td><%= bug.title %></td>
             <td><%= bug.description %></td>
@@ -65,5 +65,5 @@
     </table>
     <% if can? :manage, Bug%>
       <%=link_to "Create Bug", projects_path, :class => 'btn btn-light' %>
-    <%end %>  
+    <%end %>
   </div>

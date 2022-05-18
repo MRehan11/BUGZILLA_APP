@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 
   def new
     if !current_user.manager?
-      flash[:notice] = "This action is not permitted"
+      flash[:alert] = "This action is not permitted"
       redirect_to projects_path
     end
     @project = Project.new
@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   def create
     @project= current_user.created_projects.new(project_params)
     if @project.save
-      flash[:notice] = "Project Created"
+      flash[:success] = "Project Created"
       redirect_to @project
     else
       redirect_to projects_path
@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      flash[:notice] = "Project was updated successfully."
+      flash[:success] = "Project was updated successfully."
       redirect_to @project
     else
       render "edit"

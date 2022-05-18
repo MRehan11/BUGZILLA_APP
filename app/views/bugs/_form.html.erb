@@ -1,23 +1,10 @@
 
-  <script>
-    $(document).ready(function() {
-
-      $(':input[type="submit"]').prop('disabled', true);
-      $('input[type="text"]').keyup(function() {
-          if($(this).val() != '') {
-            $(':input[type="submit"]').prop('disabled', false);
-          }
-      });
-
-    });
-  </script>
-
 <%= bootstrap_form_with(model: @bug, url: [@project, @bug], local: true) do |f| %>
-  <%= f.text_field :title, required: true %>
-  <%= f.text_area :description, required: true %>
-  <%= f.file_field :screenshot %>
-  <%= f.date_field :start_date, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD",}}, required: true %>
+  <%= f.text_field :title, style: "width:50%" %>
+  <%= f.text_area :description, style: "width:50%" %>
+  <%= f.file_field :screenshot, style: "width:20%" %>
+  <%= f.date_field :start_date, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD",}}, style: "width:20%" %>
   <%= f.collection_select(:user_id, User.developer, :id, :name) %>
-  <%= f.select(:status, Bug.statuses.keys, required: true) %>
+  <%= f.select(:status, Bug.statuses.keys) %>
   <%= f.submit %>
 <% end %>

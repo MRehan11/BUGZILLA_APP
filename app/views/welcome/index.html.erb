@@ -1,10 +1,51 @@
 
-<h1 class="text-success">Hello, Rails!</h1>
-<% if user_signed_in? %>
-  <i class="text-danger">Logged in as</i> <strong class="text-info"><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "View Projects", projects_path, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+
+  <div class="jumbotron bg-info">
+   <div class="container">
+      <% if user_signed_in? %>
+        <h2 class="display-6 text-white">Welcome to BugZilla, Mr. <%= current_user.name.capitalize %></h2>
+      <% else %>
+        <h2 class="display-6">Kindly Login or Signup to access the projects</h2>
+      <%end %>  
+      <% if user_signed_in? %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'btn btn-light' %>
+        <%= link_to "View Projects", projects_path, :class => 'btn btn-light'  %>
+      <% else %>
+        <hr class="my-4">
+        <p class="lead">
+          <%= link_to "Login", new_user_session_path, :class => 'btn btn-primary' %> or  
+          <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-success' %>
+        </p>
+      <% end %>
+    </div>  
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h1 class="text-info">About Us</h1>
+        <div>
+          <p>
+            <b>Ognization: </b>CloudPacer Lahore<br>
+            <b>Call: </b>03415496236<br>
+            <b>Email: </b>merehan1130@gmail.com
+          </p>
+        </div>
+          
+        </p> 
+      </div>
+      <div class="col-sm">
+        <h1 class="text-info">Introduction</h1>
+        <p class="text-dark">
+          Welcome to my awesome mini project management application !<br>
+          This application will manage your small applications and projects. This application has
+          three major major User Roles Manager Developer and<br>QA.
+          This application is made by using HTML, BOOTSTRAP and JAVASCRIPT for client-side scripting and
+          Ruby and Rails for server side coding. This application is made for test proposes.
+          The requirements were "The Manager can manage the project", "The developer can only view assigned projects"
+          "The QA can manage bugs".
+          In this application you can Sign Up(can create account), Login and can work as per your role.
+        </p> 
+      </div>
+    </div>
+  </div>

@@ -1,7 +1,19 @@
 
-  
-    <div class="container text-center text-info">
-      <h1>Create new Project</h1>
+   <script>
+    $(document).ready(function() {
+
+      $(':input[type="submit"]').prop('disabled', true);
+      $('input[type="text"]').keyup(function() {
+          if($(this).val() != '') {
+            $(':input[type="submit"]').prop('disabled', false);
+          }
+      });
+
+    });
+  </script>
+
+    <div class="container text-info">
+      <h3>Create new Project</h3>
     </div>
     <div class="container">
       <%= render 'form' %>
