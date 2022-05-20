@@ -1,20 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><strong>BugZilla</strong></a>
+  <a class="navbar-brand text-danger"><strong>BugZilla</strong></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+    <% unless current_page?(root_path)%>
+      <li style= "padding-top: 6px;">
+        <%= link_to 'Home', root_path, :style => "margin-right: 14px;", :class => "btn btn-outline-primary   " %>
+      </li>
+    <%end %>
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <strong class="bg-warning text-dark">You're logged in as <%= current_user.role.capitalize %></strong>
+        <li class="nav-item" style= "padding-top: 12px;">
+          <strong class="text-success border-bottom" style="font-family:courier;">You're logged in as <%= current_user.role.capitalize %></strong>
         </li>
-      <%end %>  
+      <%end %>
     </ul>
-      <%= link_to 'Home', root_path, :class => 'btn btn-info', :style => "margin-right: 14px;" %>
       <% if user_signed_in?%>
-        <%=link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-danger' %>
+        <%=link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-outline-danger' %>
       <%end %>
   </div>
 </nav>

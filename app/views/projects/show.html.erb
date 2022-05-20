@@ -1,46 +1,36 @@
 
-  <div class="row">
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-      <% if can? :manage, Bug%>
-        <%=link_to "Add New Bug To Project", new_project_bug_path(@project) %>
-      <%end %> 
-    </div>
-  </div>
-
   <div class="container">
     <div class="row">
-    <div class="col-sm">
-      <% if current_user.manager? %>
-        <%=link_to "Create New Project", new_project_path %>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="col-sm">
+      <div class="col-4">
+      </div>
+      <div class="col-3">
+        <h3 class="text-primary">Project Details</h3>
+      </div>
+      <div class="col-5">
+        <% if can? :manage, Bug%>
+          <%=link_to "Add  Bug To Project", new_project_bug_path(@project), :class => "btn btn-outline-primary" %>
+        <%end %> 
         <% if current_user.manager? %>
-          <%=link_to "Edit Project", edit_project_path(@project) %> |
-          <%=link_to "Delete Project", project_path(@project), method: :delete %>
+          <%=link_to "Create New Project", new_project_path, :class => "btn btn-outline-primary" %>
+          <%=link_to "Edit Project", edit_project_path(@project), :class => "btn btn-outline-primary" %>
+          <%=link_to "Delete Project", project_path(@project), method: :delete, :class => "btn btn-outline-primary" %>
         <%end %>
+      </div>
     </div>
-  </div>
   </div>
 
   <div class="container text-center"> 
-    <h3 class="text-info">Project Details</h3>
-    <div class="p-3 mb-2 bg-info text-white text-left">
-      <h5 class="card-title"><strong>Project Title: </strong><%= @project.title %></h5>
+    <div class="p-3 mb-2 text-left" style="background-color: #E8F9FD;">
+      <h5 class="card-title text-danger"><strong>Project Title: </strong><%= @project.title %></h5>
     </div>
-    <div class="p-3 mb-2 bg-info text-white text-left">
+    <div class="p-3 mb-2 text-left text-danger" style="background-color: #E8F9FD;">
       <h5 class="card-title"><strong>Description: </strong><%= @project.description %></h5>
     </div>
   </div>
 
   <div class="container text-center">
     <% if @project.users.present?%>
-      <h3 class="text-info" style=" margin-top:30px;">Developers Assigned</h3>
+      <h3 class="text-primary" style=" margin-top:30px;">Developers Assigned</h3>
       <table class="table table-sm table-hover">
         <thead class="thead-dark">
           <tr>
@@ -80,10 +70,10 @@
           <tr>
             <td><%= bug.title %></td>
             <td><%= bug.description%></td>
-            <td><%=link_to "View", project_bug_path(@project, bug) %></td>
+            <td><%=link_to "View", project_bug_path(@project, bug), :class => "btn btn-outline-primary" %></td>
             <% if current_user.qa?%>
-              <td><%=link_to "Edit", edit_project_bug_path(@project, bug)  %></td>
-              <td><%=link_to "Delete", project_bug_path(@project, bug), method: :delete  %></td>
+              <td><%=link_to "Edit", edit_project_bug_path(@project, bug), :class => "btn btn-outline-warning"  %></td>
+              <td><%=link_to "Delete", project_bug_path(@project, bug), method: :delete, :class => "btn btn-outline-danger"  %></td>
             <%end %>  
           </tr>
         <%end %>  

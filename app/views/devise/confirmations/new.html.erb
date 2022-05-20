@@ -1,18 +1,36 @@
 
-  <div class="container bg-light border">
-    <h2>Resend confirmation instructions</h2>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(':input[type="submit"]').prop('disabled', true);
 
-    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+      $('#mail_field').keyup(function(){
+        if($('#mail_field').val() !== ''  ){
+          $(':input[type="submit"]').prop('disabled', false);
+        }
+      });
+    });
+  </script>
 
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <h5 class="text-primary">Resend confirmation instructions</h5>
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email@example.com", :class => "form-control", id: :mail_field, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %><br>
+          </div>
+          <div class="actions">
+            <br>
+            <%= f.submit "Resend confirmation instructions", :class => "btn btn-outline-primary" %>
+          </div>
+        <% end %><br>
+        <p class="text-danger">
+          Kindly type the registered email to resend the code in case you've not
+          received the code yet.
+        </p>
+        <%= render "devise/shared/links" %>
       </div>
-
-      <div class="actions">
-        <%= f.submit "Resend confirmation instructions" %>
-      </div>
-    <% end %>
-    <%= render "devise/shared/links" %>
+    </div>
   </div>

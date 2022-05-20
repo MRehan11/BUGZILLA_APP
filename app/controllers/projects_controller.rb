@@ -25,6 +25,10 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    if !current_user.manager?
+      flash[:alert] = "This action is not permitted"
+      redirect_to projects_path
+    end
     if @project.update(project_params)
       flash[:success] = "Project was updated successfully."
       redirect_to @project

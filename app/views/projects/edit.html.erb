@@ -1,7 +1,16 @@
  
-  <div class="container text-info">
-    <h3>Edit Project</h3>
-  </div>
-    <div class="container">
-      <%= render 'form' %>
+    <div class="row">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm">
+        <%= link_to 'Back', project_path%>
+      </div>
+      <div class="col-sm">
+      </div>
+    </div>
+    <div class="container d-flex justify-content-center text-primary">
+      <h3>Edit Project</h3>
+    </div>
+    <div class="container d-flex justify-content-center">
+      <%= render 'form' %>  
     </div>

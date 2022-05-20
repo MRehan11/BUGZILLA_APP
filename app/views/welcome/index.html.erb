@@ -5,16 +5,16 @@
       <% if user_signed_in? %>
         <h2 class="display-6 text-white">Welcome to BugZilla, Mr. <%= current_user.name.capitalize %></h2>
       <% else %>
-        <h2 class="display-6">Kindly Login or Signup to access the projects</h2>
+        <h2 class="display-6 text-white">Kindly Login or Sign up to access the projects</h2>
       <%end %>  
       <% if user_signed_in? %>
-        <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'btn btn-light' %>
-        <%= link_to "View Projects", projects_path, :class => 'btn btn-light'  %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'btn btn-outline-light' %>
+        <%= link_to "View Projects", projects_path, :class => 'btn btn-outline-light'  %>
       <% else %>
         <hr class="my-4">
         <p class="lead">
-          <%= link_to "Login", new_user_session_path, :class => 'btn btn-primary' %> or  
-          <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-success' %>
+          <%= link_to "Login", new_user_session_path, :class => 'btn btn-light' %> or  
+          <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-light' %>
         </p>
       <% end %>
     </div>  
@@ -23,19 +23,15 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <h1 class="text-info">About Us</h1>
-        <div>
-          <p>
+        <h1 class="text-primary">About Us</h1>
+          <em>
             <b>Ognization: </b>CloudPacer Lahore<br>
             <b>Call: </b>03415496236<br>
             <b>Email: </b>merehan1130@gmail.com
-          </p>
-        </div>
-          
-        </p> 
+          </em> 
       </div>
       <div class="col-sm">
-        <h1 class="text-info">Introduction</h1>
+        <h1 class="text-primary">Introduction</h1>
         <p class="text-dark">
           Welcome to my awesome mini project management application !<br>
           This application will manage your small applications and projects. This application has

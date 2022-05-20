@@ -60,15 +60,16 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: "merehan1130@gmail.com" }
-  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :enable_starttls_auto => true,
-    :address            => 'smtp.gmail.com',
-    :authentication     => :plain,
-    user_name:      ENV['SENDMAIL_USERNAME'],
-    password:       ENV['SENDMAIL_PASSWORD'],
-    domain:         ENV['MAIL_HOST'],
-    port:          '587'
+    user_name:      ENV['sendmail_username'],
+    password:       ENV['sendmail_password'],
+    domain:         ENV['mail_host'],
+    address:       'smtp.gmail.com',
+    port:          '587',
+    ssl:            true,
+    authentication: :plain,
+    enable_starttls_auto: true
   }
 end

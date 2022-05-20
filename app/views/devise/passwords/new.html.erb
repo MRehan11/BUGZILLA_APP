@@ -1,19 +1,38 @@
 
-<div class="container border bg-light">
-  <h2>Forgot your password?</h2>
 
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(':input[type="submit"]').prop('disabled', true);
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
+      $('#mail_field').keyup(function(){
+        if($('#mail_field').val() !== ''  ){
+          $(':input[type="submit"]').prop('disabled', false);
+        }
+      });
+    });
+</script>
 
-    <div class="actions">
-      <%= f.submit "Send me reset password instructions" %>
-    </div>
-  <% end %>
+<div class="container d-flex justify-content-center">
+  <div>
+    <h4 class="text-primary">Forgot your password?</h4>
 
-  <%= render "devise/shared/links" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email@example.com", :class => "form-control", id: :mail_field %>
+      </div>
+
+      <div class="actions">
+        <br>
+        <%= f.submit "Send me reset password instructions", :class => "btn btn-outline-primary" %>
+      </div><br>
+    <% end %>
+    <p class="text-danger">
+      Kindly type the registered email to find your account.
+    </p>
+
+    <%= render "devise/shared/links" %>
+  </div>  
 </div>

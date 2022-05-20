@@ -24,7 +24,7 @@
           <td><%= @bug.start_date %></td>
           <td>
             <% if can? :update, @bug %>
-              <%=link_to "Update", edit_project_bug_path(@project, @bug)  %>
+              <%=link_to "Update", edit_project_bug_path(@project, @bug), :class => "btn btn-outline-primary"  %>
             <% end %>
           </td>
         </tr>
@@ -47,7 +47,7 @@
               <td><%= user.name %></td>
               <td><%= user.email %></td>
               <td><%= user.role %></td>
-              <td><%=link_to "Assign Bug", project_bug_assign_user_path(@project, @bug, user) %></td>
+              <td><%=link_to "Assign Bug", project_bug_assign_user_path(@project, @bug, user), :class => "btn btn-outline-primary" %></td>
             </tr>
           <%end %>  
         </tbody>

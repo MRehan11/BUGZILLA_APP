@@ -1,47 +1,59 @@
   
  <script type="text/javascript">
+  $(document).ready(function() {
+    $(':input[type="submit"]').prop('disabled', true);
 
-  $('#pwd, #cfrm_pwd').on('keyup', function () {
-  if ($('#pwd').val() == $('#cfrm_pwd').val()) {
-    $('#message').html('Matching').css('color', 'green');
-  } else 
-    $('#message').html('Not Matching').css('color', 'red');
+        $('#name_field').keyup(function(){
+          if($('#name_field').val() !== '' && $('#mail_field').val() !== ''){
+            $(':input[type="submit"]').prop('disabled', false);
+          }
+        });
+
+        $('#mail_field').keyup(function(){
+          if($('#name_field').val() !== '' && $('#mail_field').val() !== ''){
+            $(':input[type="submit"]').prop('disabled', false);
+          }
+        });
+
+        $('#pwd, #cfrm_pwd').keyup(function(){
+          if($('#pwd').val() !== '' && $('#cfrm_pwd').val() !== ''){
+            $(':input[type="submit"]').prop('disabled', false);
+          }
+        });
+
+        $('#pwd, #cfrm_pwd').on('keyup', function () {
+        if ($('#pwd').val() == $('#cfrm_pwd').val()) {
+          $('#message').html('Matching').css('color', 'green');
+        } else 
+          $('#message').html('Not Matching').css('color', 'red');
+        });
   });
-
-  //  var check = function() {
-  //   if (document.getElementById('pwd').value == document.getElementById('cfrm_pwd').value) {
-  //       document.getElementById('message').style.color = 'green';
-  //       document.getElementById('message').innerHTML = 'matching';
-  //   } else {
-  //       document.getElementById('message').style.color = 'red';
-  //       document.getElementById('message').innerHTML = 'not matching';
-  //   }
-  // }
   </script>
- 
-  <div class="container">
-    <h2>Sign up</h2>
+
+  <div class="container d-flex justify-content-center">
+    <h2 class="text-info">Sign up</h2>
   </div>
-  <div class="container">
+  <div class="container d-flex justify-content-center">
+    <div>
       <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
-          <%= f.text_field :name, autofocus: true, autocomplete: "Name", required: true, style: 'width:50%;' %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "Name", placeholder: "Name", id: :name_field, required: true %>
         </div>
         <div class="field">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, style: 'width:50%;' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email@example.com", id: :mail_field, required: true %>
         </div>
 
         <div class="field">
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "atleast six digits", required: true, id: :pwd %>
           <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password", required: true, id: :pwd, style: 'width:50%;' %>
         </div>
 
         <div class="field">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, id: :cfrm_pwd, style: 'width:50%;' %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "atleast six digits", required: true, id: :cfrm_pwd %>
           <span id="message"></span>
         </div>
 
@@ -50,9 +62,9 @@
         </div>
 
         <div class="actions">
-          <%= f.submit "Sign up" %>
+          <%= f.submit "Sign up", :class => "btn btn-outline-secondary" %>
         </div>
       <% end %>
-
       <%= render "devise/shared/links" %>
-    </div>  
+    </div>
+  </div>     

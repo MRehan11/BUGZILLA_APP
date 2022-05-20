@@ -42,6 +42,10 @@ class BugsController < ApplicationController
   end
 
   def update
+    if !current_user.qa?
+      flash[:alert] = "This action is not permitted"
+      redirect_to projects_path
+    end
     if @bug.update(bug_params)
       flash[:success] = "Bug was updated successfully."
       redirect_to project_bug_path(@project, @bug)

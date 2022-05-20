@@ -1,0 +1,4 @@
+ 
+  sendmail_username: "password"
+  sendmail_password: "merehan1130@gmail.com"
+  mail_host: "localhost:3000"

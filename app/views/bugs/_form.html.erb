@@ -1,10 +1,10 @@
 
 <%= bootstrap_form_with(model: @bug, url: [@project, @bug], local: true) do |f| %>
-  <%= f.text_field :title, style: "width:50%" %>
-  <%= f.text_area :description, style: "width:50%" %>
-  <%= f.file_field :screenshot, style: "width:20%" %>
-  <%= f.date_field :start_date, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD",}}, style: "width:20%" %>
-  <%= f.collection_select(:user_id, User.developer, :id, :name) %>
-  <%= f.select(:status, Bug.statuses.keys) %>
+  <%= f.text_field :title, placeholder: "title..." %>
+  <%= f.text_area :description, placeholder: "description..." %>
+  <%= f.file_field :screenshot %>
+  <%= f.date_field :start_date, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD"}} %>
+  <%= f.collection_select(:user_id, User.developer, :id, :name, {prompt: "Select Developer" }, { class: "form-control" } )  %>
+  <%= f.select(:status, Bug.statuses.keys, {prompt: "Select Status" }, { class: "form-control" } ) %>
   <%= f.submit %>
 <% end %>
