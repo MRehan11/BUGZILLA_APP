@@ -15,10 +15,10 @@ class BugsController < ApplicationController
     @bug = @project.bugs.new(bug_params)
     @bug.qa_id = current_user.id
     if @bug.save
-      flash[:success] = "Bug Created"
+      flash[:success] = "Bug added successfully"
       redirect_to project_bug_path(@project, @bug)
     else
-      flash[:alert] = "Something bad happened!"
+      flash[:alert] = @bug.errors.full_messages.to_sentence
       redirect_to project_bugs_path
     end
   end

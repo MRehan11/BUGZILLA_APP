@@ -12,12 +12,12 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project= current_user.created_projects.new(project_params)
+    @project = current_user.created_projects.new(project_params)
     if @project.save
       flash[:success] = "Project Created"
       redirect_to projects_path
     else
-      flash[:alert] = "Ooops, there's some error!"
+      flash[:alert] = @project.errors.full_messages.to_sentence
       redirect_to projects_path
     end
   end
