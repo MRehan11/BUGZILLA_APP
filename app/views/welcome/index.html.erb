@@ -1,6 +1,6 @@
 
 
-  <div class="jumbotron bg-info">
+  <div class="jumbotron bg-info" style="font-family:courier;">
    <div class="container">
       <% if user_signed_in? %>
         <h2 class="display-6 text-white">Welcome to BugZilla, Mr. <%= current_user.name.capitalize %></h2>
@@ -20,15 +20,15 @@
     </div>  
   </div>
 
-  <div class="container">
+  <div class="container" style="font-family:courier;">
     <div class="row">
       <div class="col-sm">
         <h1 class="text-primary">About Us</h1>
-          <em>
+          <p>
             <b>Ognization: </b>CloudPacer Lahore<br>
             <b>Call: </b>03415496236<br>
             <b>Email: </b>merehan1130@gmail.com
-          </em> 
+          </p> 
       </div>
       <div class="col-sm">
         <h1 class="text-primary">Introduction</h1>
