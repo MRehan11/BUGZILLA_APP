@@ -1,10 +1,11 @@
 class BugsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:new, :create, :show, :index, :edit, :update]
-  before_action :set_bug, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:new, :create, :show, :index, :edit, :update, :assign_user ]
+  before_action :set_bug, only: [:show, :edit, :update, :destroy, :assign_user]
 
   def new
     if !current_user.qa?
+      flash[:alert] = "This action is not permitted"
       redirect_to projects_path
     end
     @bug = @project.bugs.new
@@ -17,6 +18,7 @@ class BugsController < ApplicationController
       flash[:success] = "Bug Created"
       redirect_to project_bug_path(@project, @bug)
     else
+      flash[:alert] = "Something bad happened!"
       redirect_to project_bugs_path
     end
   end
@@ -25,9 +27,10 @@ class BugsController < ApplicationController
     @bug = Bug.find_by(id: params[:bug_id])
     if @bug.present?
       @bug.update(user_id: params[:format])
-      render status: :ok, json: {message: "Success"}
+      flash[:success] = "User assigned successfully"
+      redirect_to project_bug_path(@project, @bug)
     else
-      render status: :unprocessable_entity, json: { message: "There is some sort of issue" }
+      flash[:alert] = "User assigned successfully"
     end
   end
 
@@ -66,14 +69,14 @@ class BugsController < ApplicationController
   end
 
   def set_bug
-    @bug = Bug.find(params[:id])
+    @bug = Bug.find_by(id: params[:id])
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find_by(id: params[:project_id])
   end
 
   def set_bugs
-    @bug = Bug.find_by(params[:id])
+    @bug = Bug.find_by(id: params[:id])
   end
 end

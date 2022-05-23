@@ -11,8 +11,20 @@
 
   <body>
     <%=render "layouts/navbar" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% flash.each do |type, msg| %>
+      <%if type == "success" %> 
+        <div class=" container text-center alert alert-info msgs">
+          <%= msg %>
+        </div>  
+      <%else %>
+        <div class=" container text-center alert alert-danger msgs">
+          <%= msg %>
+        </div>
+      <%end %>  
+      <script>
+        setTimeout("$('.msgs').fadeOut('slow')", 2000)
+      </script>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,6 +1,7 @@
   
   
   <div class="container">
+    <div class="row"></div>
     <div class="row">
       <div class="col-6 text-left">
       <h3 class="text-primary">All Projects</h3>
@@ -38,7 +39,7 @@
             </td>
             <% if can? :manage, project %>
               <td>
-                <%=link_to "edit", edit_project_path(project), :class => "btn btn-outline-warning"  %>  
+                <%=link_to "edit", edit_project_path(project), :class => "btn btn-outline-dark"  %>  
               </td>
               <td>
                 <%=link_to "delete", project_path(project), method: :delete, :class => "btn btn-outline-danger"  %>

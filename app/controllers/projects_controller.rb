@@ -15,8 +15,9 @@ class ProjectsController < ApplicationController
     @project= current_user.created_projects.new(project_params)
     if @project.save
       flash[:success] = "Project Created"
-      redirect_to @project
+      redirect_to projects_path
     else
+      flash[:alert] = "Ooops, there's some error!"
       redirect_to projects_path
     end
   end
@@ -41,6 +42,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     redirect_to projects_path
+    flash[:success] = "Project was deleted successfully."
   end
 
   def show
@@ -64,7 +66,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.find_by(id: params[:id])
   end
 
 end
