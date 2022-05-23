@@ -13,13 +13,13 @@
     <%=render "layouts/navbar" %>
     <% flash.each do |type, msg| %>
       <%if type == "success" %> 
-        <div class=" container text-center alert alert-info msgs">
+        <p class=" container text-dark text-center alert alert-info msgs">
           <%= msg %>
-        </div>  
+        </p>  
       <%else %>
-        <div class=" container text-center alert alert-danger msgs">
+        <p class=" container text-dark text-center alert alert-danger msgs">
           <%= msg %>
-        </div>
+        </p>
       <%end %>  
       <script>
         setTimeout("$('.msgs').fadeOut('slow')", 2000)
