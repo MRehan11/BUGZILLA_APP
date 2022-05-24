@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2022_05_10_172234) do
     t.integer "user_id"
     t.index ["project_id"], name: "index_bugs_on_project_id"
     t.index ["qa_id"], name: "index_bugs_on_qa_id"
-    t.index ["user_id"], name: "index_bugs_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
