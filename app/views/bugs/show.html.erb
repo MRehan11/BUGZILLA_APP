@@ -1,6 +1,10 @@
 
+  
+  <div class="mt-4">
+    <%= render_breadcrumbs :separator => ' / '%>
+   </div>
   <% if @bug.present?%>
-    <div class="container text-center">
+    <div class="container text-center mt-4">
         <h1 class="text-info">Bug Details</h1>
         <table class="table table-hover">
           <thead class="thead-dark">
@@ -10,9 +14,6 @@
               <th>Owner</th>
               <th>Assignee</th>
               <th>Start Date</th>
-              <% if current_user.qa?%>
-                <th>Update</th>
-              <%end %>
             </tr>
           </thead>
           <tbody>
@@ -21,12 +22,7 @@
               <td><%= @bug.description %></td>
               <td><%= @bug.creator.name %></td>
               <td><%= @bug.user.try(:name) %></td>
-              <td><%= @bug.start_date %></td>
-              <td>
-                <% if can? :update, @bug %>
-                  <%=link_to "Update", edit_project_bug_path(@project, @bug), :class => "btn btn-outline-primary"  %>
-                <% end %>
-              </td>
+              <td><%= @bug.start_date.strftime('%F') %></td>
             </tr>
           </tbody>
         </table>

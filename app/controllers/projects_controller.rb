@@ -3,6 +3,12 @@ class ProjectsController < ApplicationController
   before_action :set_projects, only: [:create, :index]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Projects Listing", :projects_path
+
+  def index
+  end
+
   def new
     if !current_user.manager?
       flash[:alert] = "This action is not permitted"
@@ -40,15 +46,17 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-    redirect_to projects_path
-    flash[:success] = "Project was deleted successfully."
+    if @project.present?
+      @project.destroy
+      redirect_to projects_path
+      flash[:success] = "Project was deleted successfully"
+    else
+      flash[:alert] = "Project not found"
+    end  
   end
 
   def show
-  end
-
-  def index
+    add_breadcrumb "project", project_path(@project)
   end
 
   private

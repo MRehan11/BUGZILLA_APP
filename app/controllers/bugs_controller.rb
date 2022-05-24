@@ -3,6 +3,9 @@ class BugsController < ApplicationController
   before_action :set_project, only: [:new, :create, :show, :index, :edit, :update, :assign_user ]
   before_action :set_bug, only: [:show, :edit, :update, :destroy, :assign_user]
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "projects listing", :projects_path
+
   def new
     if !current_user.qa?
       flash[:alert] = "This action is not permitted"
@@ -35,6 +38,8 @@ class BugsController < ApplicationController
   end
 
   def show
+    add_breadcrumb "project", project_path(@project)
+    add_breadcrumb "project bug", :project_bug_path
   end
 
   def index
@@ -58,8 +63,13 @@ class BugsController < ApplicationController
   end
 
   def destroy
-    @bug.destroy
-    redirect_to project_path
+    if @bug.present?
+      @bug.destroy
+      redirect_to project_path
+      flash[:success] = "Bug deleted successfully"
+    else 
+      flash[:alert] = "Bug not found"
+    end
   end
 
   private
@@ -74,9 +84,5 @@ class BugsController < ApplicationController
 
   def set_project
     @project = Project.find_by(id: params[:project_id])
-  end
-
-  def set_bugs
-    @bug = Bug.find_by(id: params[:id])
   end
 end

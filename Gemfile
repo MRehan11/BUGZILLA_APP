@@ -49,6 +49,7 @@ gem 'jquery-rails'
 gem "bootstrap_form", "~> 5.0"
 gem 'mail', '2.6.5'
 gem "figaro"
+gem "breadcrumbs_on_rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -3,8 +3,8 @@
   <%= f.text_field :title, placeholder: "title..." %>
   <%= f.text_area :description, placeholder: "description..." %>
   <%= f.file_field :screenshot %>
-  <%= f.date_field :start_date, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD"}} %>
+  <%= f.date_field :start_date, min: Date.today, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD"}} %>
   <%= f.collection_select(:user_id, User.developer, :id, :name, {prompt: "Select Developer" }, { class: "form-control" } )  %>
-  <%= f.select(:status, Bug.statuses.keys, {prompt: "Select Status" }, { class: "form-control" } ) %>
+  <%= f.select(:status, Bug.statuses.keys.map { |k| [k.humanize, k] }, {prompt: "Select Status" }, { class: "form-control" } ) %>
   <%= f.submit %>
 <% end %>
