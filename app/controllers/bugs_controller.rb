@@ -1,12 +1,14 @@
 class BugsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:new, :create, :show, :index, :edit, :update, :assign_user ]
+  before_action :set_project, only: [:new, :create, :show, :index, :edit, :update, :assign_user, :destroy ]
   before_action :set_bug, only: [:show, :edit, :update, :destroy, :assign_user]
 
   add_breadcrumb "Home", :root_path
   add_breadcrumb "projects listing", :projects_path
 
   def new
+    add_breadcrumb "project", project_path(@project)
+    add_breadcrumb "new bug", new_project_bug_path(@project)
     if !current_user.qa?
       flash[:alert] = "This action is not permitted"
       redirect_to projects_path
@@ -47,6 +49,8 @@ class BugsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb "project", project_path(@project)
+    add_breadcrumb "edit project", edit_project_bug_path(@project)
   end
 
   def update
@@ -65,7 +69,7 @@ class BugsController < ApplicationController
   def destroy
     if @bug.present?
       @bug.destroy
-      redirect_to project_path
+      redirect_to project_path(@project)
       flash[:success] = "Bug deleted successfully"
     else 
       flash[:alert] = "Bug not found"

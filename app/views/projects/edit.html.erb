@@ -1,6 +1,30 @@
  
-    <div class="row">
-      <div class="col-6 text-center">
+    <script>
+      $(document).ready(function() {
+
+        $(':input[type="submit"]').prop('disabled', true);
+
+
+        $('#project-title').keyup(function(){
+          if($('#project-title').val() !== '' && $('#project-description').val() !== ''){
+            $(':input[type="submit"]').prop('disabled', false);
+          }
+        });
+
+        $('#project-description').keyup(function(){
+          if($('#project-title').val() !== '' && $('#project-description').val() !== ''){
+            $(':input[type="submit"]').prop('disabled', false);
+          }
+        });
+
+      });
+    </script>
+    
+    <div class="mt-4">
+      <%= render_breadcrumbs :separator => ' / '%>
+    </div>
+    <div class="row mt-4">
+      <div class="col-6 text-left">
         <%= link_to 'Back', project_path, :class => "btn btn-outline-primary"%>
       </div>
       <div class="col-3">
@@ -10,13 +34,13 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm">
+        <div class="col-3">
         </div>
         <div class="col-6">
           <h3 class="text-center text-primary">Edit Project</h3>
           <%= render 'form' %>
         </div>
-        <div class="col-sm">
+        <div class="col-3">
         </div>
       </div>
     </div>

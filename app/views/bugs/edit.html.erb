@@ -1,4 +1,26 @@
 
+  <script>
+    $(document).ready(function() {
+
+      $(':input[type="submit"]').prop('disabled', true);
+
+      $('#bug_title').keyup(function(){
+        if($('#bug_title').val() !== '' && $('#bug_description').val() !== ''){
+          $(':input[type="submit"]').prop('disabled', false);
+        }
+      });
+
+      $('#bug_description').keyup(function(){
+        if($('#bug_title').val() !== '' && $('#bug_description').val() !== ''){
+          $(':input[type="submit"]').prop('disabled', false);
+        }
+      });
+    });
+    </script>
+  
+   <div class="mt-4">
+    <%= render_breadcrumbs :separator => ' / '%>
+   </div>
   <div class="container d-flex justify-content-center text-primary">
   <h3>Update Bug</h3>
   </div>

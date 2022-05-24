@@ -12,7 +12,7 @@
   <body>
     <%=render "layouts/navbar" %>
     <% flash.each do |type, msg| %>
-      <%if type == "success" %> 
+      <%if type == "success" or type == "notice" %> 
         <p class=" container text-dark text-center alert alert-info msgs">
           <%= msg %>
         </p>  

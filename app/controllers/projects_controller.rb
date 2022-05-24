@@ -4,12 +4,13 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   add_breadcrumb "Home", :root_path
-  add_breadcrumb "Projects Listing", :projects_path
+  add_breadcrumb "projects listing", :projects_path
 
   def index
   end
 
   def new
+    add_breadcrumb "new project", new_project_path
     if !current_user.manager?
       flash[:alert] = "This action is not permitted"
       redirect_to projects_path
@@ -29,6 +30,8 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb "project", project_path(@project)
+    add_breadcrumb "edit project", edit_project_path
   end
 
   def update

@@ -1,7 +1,7 @@
 
 <%= bootstrap_form_with(model: @bug, url: [@project, @bug], local: true) do |f| %>
-  <%= f.text_field :title, placeholder: "title..." %>
-  <%= f.text_area :description, placeholder: "description..." %>
+  <%= f.text_field :title, placeholder: "title...", id: :bug_title %>
+  <%= f.text_area :description, placeholder: "description...", id: :bug_description %>
   <%= f.file_field :screenshot %>
   <%= f.date_field :start_date, min: Date.today, as: :date_time_picker, input_html: {data: {date_formate: "YYYY-MM-DD"}} %>
   <%= f.collection_select(:user_id, User.developer, :id, :name, {prompt: "Select Developers" }, { class: "form-control" } )  %>

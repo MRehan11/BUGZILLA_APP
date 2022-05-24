@@ -5,21 +5,31 @@
    </div>
   <% if @bug.present?%>
     <div class="container text-center mt-4">
-        <h1 class="text-info">Bug Details</h1>
+        <h1 class="text-primary">Bug Details</h1>
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
               <th>Title</th>
-              <th>Description</th>
+              <th>status</th>
               <th>Owner</th>
               <th>Assignee</th>
               <th>Start Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="text-primary">
               <td><%= @bug.title %></td>
-              <td><%= @bug.description %></td>
+              <td>
+                <%if @bug.status == "new_"%>
+                  <p class="text-danger"><%= @bug.status.humanize%></p>
+                <%elsif @bug.status == "started"%>
+                  <p class="text-warning"><%= @bug.status.humanize%></p>
+                <%elsif @bug.status == "in_progress"%>
+                  <p class="text-info"><%= @bug.status.humanize %></p>
+                <%elsif @bug.status == "completed"%>
+                  <p class="text-success"><%= @bug.status.humanize%></p>
+                <%end %>
+              </td>
               <td><%= @bug.creator.name %></td>
               <td><%= @bug.user.try(:name) %></td>
               <td><%= @bug.start_date.strftime('%F') %></td>
@@ -27,7 +37,7 @@
           </tbody>
         </table>
         <% if current_user.qa?%>
-          <h3 class="text-info">Available Users</h3>
+          <h3 class="text-primary">Available Users</h3>
           <table class="table table-hover">
             <thead class="thead-dark">
               <tr>
@@ -39,11 +49,11 @@
             </thead>
             <tbody>
               <% User.where(role: 0).where.not(id: @bug.id).each do |user| %>
-                <tr>
+                <tr class="text-primary">
                   <td><%= user.name %></td>
                   <td><%= user.email %></td>
                   <td><%= user.role %></td>
-                  <td><%=link_to "Assign Bug", project_bug_assign_user_path(@project, @bug, user), :class => "btn btn-outline-primary" %></td>
+                  <td><%=link_to "Assign Bug", project_bug_assign_user_path(@project, @bug, user), :class => "btn btn-outline-dark" %></td>
                 </tr>
               <%end %>  
             </tbody>

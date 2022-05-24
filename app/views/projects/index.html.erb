@@ -34,11 +34,11 @@
       </thead>
       <tbody>
         <% @projects.each do |project| %>
-          <tr>
+          <tr class="text-primary">
             <td><%= project.title %></td>
             <td><%= project.creator.name.capitalize %></td>
             <td>
-              <%=link_to "view", project_path(project), :class => "btn btn-outline-primary" %>
+              <%=link_to "view", project_path(project), :class => "btn btn-outline-dark" %>
             </td>
             <% if can? :manage, project %>
               <td>
