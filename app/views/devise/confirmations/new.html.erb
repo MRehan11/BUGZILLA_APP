@@ -11,18 +11,17 @@
     });
   </script>
 
-  <div class="container">
-    <div class="row justify-content-center">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-4"></div>
       <div class="col-4">
-        <h5 class="text-primary">Resend confirmation instructions</h5>
+        <h5 class="text-primary text-center">Resend confirmation instructions</h5>
         <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
-          <div class="field">
-            <%= f.label :email %><br />
+          <div class="field mt-4">
             <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email@example.com", :class => "form-control", id: :mail_field, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %><br>
           </div>
           <div class="actions">
-            <br>
             <%= f.submit "Resend confirmation instructions", :class => "btn btn-outline-primary" %>
           </div>
         <% end %><br>
@@ -32,5 +31,6 @@
         </p>
         <%= render "devise/shared/links" %>
       </div>
+      <div class="col-4"></div>
     </div>
   </div>

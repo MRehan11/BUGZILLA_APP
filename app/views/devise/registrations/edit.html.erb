@@ -15,14 +15,14 @@
       $(':input[type="submit"]').prop('disabled', true);
 
 
-      $('#mail').keyup(function(){
-        if($('#mail').val() !== '' && $('#pwd').val() !== ''){
+      $('#mail-field').keyup(function(){
+        if($('#mail-field').val() !== ''){
           $(':input[type="submit"]').prop('disabled', false);
         }
       });
 
       $('#pwd').keyup(function(){
-        if($('#mail').val() !== '' && $('#pwd').val() !== ''){
+        if($('#mail-field').val() !== '' && $('#pwd').val() !== ''){
           $(':input[type="submit"]').prop('disabled', false);
         }
       });
@@ -31,15 +31,15 @@
   </script>
 
   
- <div class="container justify-content-center">
+ <div class="container justify-content-center mt-4">
   <div class="row">
-    <div class="col-5">
+    <div class="col-6">
       <h3 class="text-primary text-center">Edit <%= resource_name.to_s.humanize %></h3>
       <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", id: :mail %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "mail-field" %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
