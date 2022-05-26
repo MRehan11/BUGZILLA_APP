@@ -6,7 +6,7 @@
   <% if @bug.present?%>
     <div class="container text-center mt-4">
         <h1 class="text-primary">Bug Details</h1>
-        <table class="table table-hover">
+        <table class="table table-hover border border-dark">
           <thead class="thead-dark">
             <tr>
               <th>Image</th>
@@ -59,7 +59,7 @@
         </table>
         <% if current_user.qa?%>
           <h3 class="text-primary">Available Users</h3>
-          <table class="table table-hover">
+          <table class="table table-hover border border-dark">
             <thead class="thead-dark">
               <tr>
                 <th>Name</th>

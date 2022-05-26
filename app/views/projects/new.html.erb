@@ -5,26 +5,11 @@
       $(':input[type="submit"]').prop('disabled', true);
 
 
-      $('#project-title').keyup(function(){
-        console.log("here in title")
-        if($('#project-title').val() !== ''){
+      $('#project-title, #project-description').keyup(function(){
+        if($('#project-title').val() !== '' || $('#project-description').val() !== ''){
           $(':input[type="submit"]').prop('disabled', false);
         }
       });
-
-      $('#project-description').keyup(function(){
-        console.log("here in description")
-        if($('#project-title').val() !== '' && $('#project-description').val() !== ''){
-          $(':input[type="submit"]').prop('disabled', false);
-        }
-      });
-
-      // $(':input[type="submit"]').onchange(function() {
-      //     $('#project-title')
-      //     if($(this).val() != '') {
-      //       $(':input[type="submit"]').prop('disabled', false);
-      //     }
-      // });
 
     });
   </script>

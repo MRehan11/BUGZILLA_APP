@@ -5,13 +5,7 @@
         $(':input[type="submit"]').prop('disabled', true);
 
 
-        $('#project-title').keyup(function(){
-          if($('#project-title').val() !== '' && $('#project-description').val() !== ''){
-            $(':input[type="submit"]').prop('disabled', false);
-          }
-        });
-
-        $('#project-description').keyup(function(){
+        $('#project-title, #project-description, #project-user').keyup(function(){
           if($('#project-title').val() !== '' && $('#project-description').val() !== ''){
             $(':input[type="submit"]').prop('disabled', false);
           }

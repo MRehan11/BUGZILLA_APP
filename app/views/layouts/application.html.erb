@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="bg-light">
     <%=render "layouts/navbar" %>
     <% flash.each do |type, msg| %>
       <%if type == "success" or type == "notice" %> 

@@ -78,7 +78,7 @@ class BugsController < ApplicationController
       flash[:success] = "Bug was updated successfully."
       redirect_to project_bug_path(@project, @bug)
     else
-      flash[:success] = "Cannot update the bug"
+      flash[:success] = @bug.errors.full_messages
       redirect_to project_bug_path(@project, @bug)
     end
   end
