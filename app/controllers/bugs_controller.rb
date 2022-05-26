@@ -32,15 +32,7 @@ class BugsController < ApplicationController
   def update_status
     @bug = Bug.find_by(id: params[:bug_id])
     if @bug.present?
-      if params[:format] == "new"
-        @bug.update(status: 0)
-      elsif params[:format] == "started"
-        @bug.update(status: 1)
-      elsif params[:format] == "in progress"
-        @bug.update(status: 2)
-      elsif params[:format] == "completed"
-        @bug.update(status: 3)
-      end
+      @bug.update(status: params[:format].to_i)
       flash[:success] = "Status changed successfully"
       redirect_to project_bug_path(@project, @bug)
     else
