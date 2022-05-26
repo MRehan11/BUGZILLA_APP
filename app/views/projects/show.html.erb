@@ -63,10 +63,13 @@
             <th scope="col">Title</th>
             <th scope="col">Status</th>
             <th scope="col">View</th>
-            <% if current_user.qa?%>
+            <% if can? :edit, Bug%>
               <th scope="col">Update</th>
+            <%end %>
+            <% if can? :manage, Bug%>
               <th scope="col">Delete</th>
-            <%end %>  
+            <%end %>
+            <th>Change Status</th>
           </tr>
         </thead>
         <tbody>
@@ -85,13 +88,29 @@
             <%end %>
             </td>
             <td><%=link_to "View", project_bug_path(@project, bug), :class => "btn btn-outline-primary" %></td>
-            <% if current_user.qa?%>
+            <% if can? :edit, Bug%>
               <td><%=link_to "Edit", edit_project_bug_path(@project, bug), :class => "btn btn-outline-warning"  %></td>
+            <%end %>
+            <% if can? :manage, Bug%>
               <td><%=link_to "Delete", project_bug_path(@project, bug), method: :delete, :class => "btn btn-outline-danger"  %></td>
-            <%end %>  
+            <%end %>
+            <td>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Select Status <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu text-center" role="menu">
+                <li><%=link_to 'new', project_bug_update_status_path(@project, bug, "new"), :class => "text-danger" %></li>
+                <li><%=link_to 'started', project_bug_update_status_path(@project, bug, "started"), :class => "text-warning" %></li>
+                <li><%=link_to 'in progress', project_bug_update_status_path(@project, bug, "in progress"), :class => "text-info" %></li>
+                <li class="divider"></li>
+                <li><%=link_to 'completed', project_bug_update_status_path(@project, bug, "completed"), :class => "text-success" %></li>
+              </ul>
+            </div>
+            </td>
           </tr>
         <%end %>  
         </tbody>
       </table>
     <%end %>  
-  </div>  
+  </div>

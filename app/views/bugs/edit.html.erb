@@ -4,23 +4,23 @@
 
       $(':input[type="submit"]').prop('disabled', true);
 
-      $('#bug_title').keyup(function(){
+      $('#bug_title, #bug_description').keyup(function(){
         if($('#bug_title').val() !== '' && $('#bug_description').val() !== ''){
           $(':input[type="submit"]').prop('disabled', false);
         }
       });
 
-      $('#bug_description').keyup(function(){
-        if($('#bug_title').val() !== '' && $('#bug_description').val() !== ''){
-          $(':input[type="submit"]').prop('disabled', false);
-        }
-      });
+      // $('#select_user').keyup(function(){
+      //   if($('#select_user').val() !== ''){
+      //     $(':input[type="submit"]').prop('disabled', false);
+      //   }
+      // });
     });
-    </script>
+  </script>
   
-   <div class="mt-4">
+  <div class="mt-4">
     <%= render_breadcrumbs :separator => ' / '%>
-   </div>
+  </div>
   <div class="container d-flex justify-content-center text-primary">
   <h3>Update Bug</h3>
   </div>

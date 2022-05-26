@@ -1,8 +1,8 @@
   
   
   <%= bootstrap_form_with(model: @project,  local: true, label_errors: true, inline_errors: true) do |f| %>
-    <%= f.text_field :title, id: "project-title", placeholder: "title..." %>
-    <%= f.text_area :description, id: "project-description", placeholder: "description..." %>
-    <%= f.collection_select(:user_ids, User.developer, :id, :name, {prompt: "Select Developers" }, {:multiple => true, class: "form-control", id: "project-user"} ) %>
+    <%= f.text_field :title, id: "project-title", placeholder: "title...", required: true %>
+    <%= f.text_area :description, id: "project-description", placeholder: "description...", required: true %>
+    <%= f.collection_select(:user_ids, User.developer, :id, :name, {prompt: "Select Developers" }, {:multiple => true, class: "form-control", id: "project-user", required: true} ) %>
     <%= f.submit %>
   <% end %>

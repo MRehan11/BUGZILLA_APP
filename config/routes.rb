@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'assigned_users'
     resources :bugs do
       get 'assign_user'
+      get 'update_status'
     end
   end
   root to: 'welcome#index'

@@ -7,7 +7,7 @@
 
       $('#project-title').keyup(function(){
         console.log("here in title")
-        if($('#project-title').val() !== '' && $('#project-description').val() !== ''){
+        if($('#project-title').val() !== ''){
           $(':input[type="submit"]').prop('disabled', false);
         }
       });

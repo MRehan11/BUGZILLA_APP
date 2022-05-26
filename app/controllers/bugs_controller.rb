@@ -1,10 +1,11 @@
 class BugsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:new, :create, :show, :index, :edit, :update, :assign_user, :destroy ]
-  before_action :set_bug, only: [:show, :edit, :update, :destroy, :assign_user]
+  before_action :set_project, only: [:new, :create, :show, :index, :edit, :update, :assign_user, :destroy, :update_status ]
+  before_action :set_bug, only: [:show, :edit, :update, :destroy, :assign_user, :update_status]
 
   add_breadcrumb "Home", :root_path
   add_breadcrumb "projects listing", :projects_path
+
 
   def new
     add_breadcrumb "project", project_path(@project)
@@ -28,6 +29,25 @@ class BugsController < ApplicationController
     end
   end
 
+  def update_status
+    @bug = Bug.find_by(id: params[:bug_id])
+    if @bug.present?
+      if params[:format] == "new"
+        @bug.update(status: 0)
+      elsif params[:format] == "started"
+        @bug.update(status: 1)
+      elsif params[:format] == "in progress"
+        @bug.update(status: 2)
+      elsif params[:format] == "completed"
+        @bug.update(status: 3)
+      end
+      flash[:success] = "Status changed successfully"
+      redirect_to project_bug_path(@project, @bug)
+    else
+      flash[:alert] = "Bug not found"
+    end
+  end
+
   def assign_user
     @bug = Bug.find_by(id: params[:bug_id])
     if @bug.present?
@@ -35,7 +55,7 @@ class BugsController < ApplicationController
       flash[:success] = "User assigned successfully"
       redirect_to project_bug_path(@project, @bug)
     else
-      flash[:alert] = "User assigned successfully"
+      flash[:alert] = "Bug not found"
     end
   end
 
@@ -54,15 +74,12 @@ class BugsController < ApplicationController
   end
 
   def update
-    if !current_user.qa?
-      flash[:alert] = "This action is not permitted"
-      redirect_to projects_path
-    end
     if @bug.update(bug_params)
       flash[:success] = "Bug was updated successfully."
       redirect_to project_bug_path(@project, @bug)
     else
-      render "edit"
+      flash[:success] = "Cannot update the bug"
+      redirect_to project_bug_path(@project, @bug)
     end
   end
 
